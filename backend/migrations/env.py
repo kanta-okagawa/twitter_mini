@@ -6,7 +6,7 @@ from sqlmodel import SQLModel, create_engine
 
 from alembic import context
 
-from app.models.test import Hero
+from app.models.test import User
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
