@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15
+    container_name: twitter_mini_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: twitter_mini
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: twitter_mini_backend
+    depends_on:
+      - db
+    volumes:
+      - ./backend/app:/backend/app
+    ports:
+      - "8888:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/twitter_mini
+
+
+volumes:
+  postgres_data:
+
